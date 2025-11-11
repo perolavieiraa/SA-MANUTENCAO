@@ -1,4 +1,5 @@
 <?php
+// código com erros 
 require_once 'conexao.php';
 
 $sql = "SELECT * FROM clientes";
