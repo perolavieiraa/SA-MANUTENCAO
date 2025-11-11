@@ -15,8 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = $_POST['nome'];
     $cpf = $_POST['cpf'];
 
+    $sql_update = "UPDATE clientes SET nome = '$nome', cpf = '$cpf' WHERE id = $id";
+    // corrigido: nome e cpf estavam invertidos
+    // causa: troca de variáveis, salvava dados errados no banco
+    // manutenção: corretiva
 
-    $sql_update = "UPDATE clientes SET nome = '$cpf', cpf = '$nome' WHERE id = $id";
     mysqli_query($conn, $sql_update);
 
     header('Location: index.php');
@@ -31,11 +34,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
   <h1>Editar</h1>
+
   <form method="post">
     <label>Nome:<br><input type="text" name="nome" value="<?php echo $row['nome']; ?>"></label><br><br>
     <label>CPF:<br><input type="text" name="cpf" value="<?php echo $row['cpf']; ?>"></label><br><br>
     <button type="submit">Atualizar</button>
   </form>
+
   <p><a href="index.php">Voltar</a></p>
 </body>
 </html>
